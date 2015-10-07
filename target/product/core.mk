@@ -41,7 +41,6 @@ PRODUCT_PACKAGES += \
     Keyguard \
     LatinIME \
     ManagedProvisioning \
-    PicoTts \
     PacProcessor \
     libpac \
     PrintSpooler \
