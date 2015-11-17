@@ -22,13 +22,11 @@
 
 PRODUCT_PACKAGES += \
     BasicDreams \
-    Browser \
-    Calendar \
+    Calculator \
     CalendarProvider \
     CaptivePortalLogin \
     CertInstaller \
     Contacts \
-    DeskClock \
     DocumentsUI \
     DownloadProviderUi \
     Email \
