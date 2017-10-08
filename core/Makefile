@@ -291,7 +291,7 @@ endif
 	$(hide) TARGET_BUILD_TYPE="$(TARGET_BUILD_VARIANT)" \
 			TARGET_BUILD_FLAVOR="$(TARGET_PRODUCT)-$(TARGET_BUILD_VARIANT)" \
 			TARGET_DEVICE="$(TARGET_VENDOR_DEVICE_NAME)" \
-			CARBON_DEVICE="$(TARGET_DEVICE)" \
+			OCTOS_DEVICE="$(TARGET_DEVICE)" \
 			PRODUCT_NAME="$(TARGET_VENDOR_PRODUCT_NAME)" \
 			PRODUCT_BRAND="$(PRODUCT_BRAND)" \
 			PRODUCT_DEFAULT_LOCALE="$(call get-default-product-locale,$(PRODUCT_LOCALES))" \
@@ -2149,15 +2149,15 @@ name := $(name)-target_files-$(FILE_NAME_TAG)
 intermediates := $(call intermediates-dir-for,PACKAGING,target_files)
 BUILT_TARGET_FILES_PACKAGE := $(intermediates)/$(name).zip
 
-# Export signing properties on Carbon Builds
-ifneq ($(CARBON_BUILD),)
-  $(shell echo "CARBON_BUILD=$(CARBON_BUILD)" > $(PRODUCT_OUT)/signing.props)
+# Export signing properties on OctOS Builds
+ifneq ($(OCTOS_BUILD),)
+  $(shell echo "OCTOS_BUILD=$(OCTOS_BUILD)" > $(PRODUCT_OUT)/signing.props)
   $(shell echo "TARGET_OTA_ASSERT_DEVICE=$(TARGET_OTA_ASSERT_DEVICE)" >> $(PRODUCT_OUT)/signing.props)
   $(shell echo "TARGET_RELEASETOOL_OTA_FROM_TARGET_SCRIPT=$(TARGET_RELEASETOOL_OTA_FROM_TARGET_SCRIPT)" >> $(PRODUCT_OUT)/signing.props)
   $(shell echo "TARGET_UNIFIED_DEVICE=$(TARGET_UNIFIED_DEVICE)" >> $(PRODUCT_OUT)/signing.props)
   $(shell echo "TARGET_DEVICE=$(TARGET_DEVICE)" >> $(PRODUCT_OUT)/signing.props)
   $(shell echo "TARGET_SETS_FSTAB=$(TARGET_SETS_FSTAB)" >> $(PRODUCT_OUT)/signing.props)
-  $(shell echo "CARBON_VERSION=$(CARBON_VERSION)" >> $(PRODUCT_OUT)/signing.props)
+  $(shell echo "OCTOS_VERSION=$(OCTOS_VERSION)" >> $(PRODUCT_OUT)/signing.props)
 endif
 
 $(BUILT_TARGET_FILES_PACKAGE): intermediates := $(intermediates)
@@ -2562,7 +2562,7 @@ INTERNAL_OTA_PACKAGE_TARGET := $(PRODUCT_OUT)/$(name).zip
 
 $(INTERNAL_OTA_PACKAGE_TARGET): KEY_CERT_PAIR := $(DEFAULT_KEY_CERT_PAIR)
 
-ifneq ($(CARBON_BUILD),)
+ifneq ($(OCTOS_BUILD),)
     $(INTERNAL_OTA_PACKAGE_TARGET): backuptool := true
 else
     $(INTERNAL_OTA_PACKAGE_TARGET): backuptool := false
@@ -2613,7 +2613,7 @@ $(INTERNAL_OTA_PACKAGE_TARGET): $(BUILT_TARGET_FILES_PACKAGE) \
 	   $(TARGET_RELEASETOOL_OTA_FROM_TARGET_ADDITIONAL_ARGS) \
 	   $(BUILT_TARGET_FILES_PACKAGE) $@
 
-CARBON_TARGET_PACKAGE := $(PRODUCT_OUT)/CARBON-$(CARBON_VERSION).zip
+OCTOS_TARGET_PACKAGE := $(PRODUCT_OUT)/OCTOS-$(OCTOS_VERSION).zip
 
 # This is for PhaseBurn
 .PHONY: sandwich measandwich
@@ -2650,24 +2650,16 @@ sandwich:
 	@echo -e ${CL_CYN}"                      \`        \`                                   "${CL_RST}
 measandwich: sandwich
 
-.PHONY: otapackage carbon
+.PHONY: otapackage octos
 otapackage: $(INTERNAL_OTA_PACKAGE_TARGET)
-carbon: otapackage
-	$(hide) ln -f $(INTERNAL_OTA_PACKAGE_TARGET) $(CARBON_TARGET_PACKAGE)
-	$(hide) $(MD5SUM) $(CARBON_TARGET_PACKAGE) > $(CARBON_TARGET_PACKAGE).md5sum
+octos: otapackage
+	$(hide) ln -f $(INTERNAL_OTA_PACKAGE_TARGET) $(OCTOS_TARGET_PACKAGE)
+	$(hide) $(MD5SUM) $(OCTOS_TARGET_PACKAGE) > $(OCTOS_TARGET_PACKAGE).md5sum
 	@echo ""
 	@echo -e ${CL_YLW}"════════════════════════════════════════════════════════════════════════════════"${CL_RST}
-	@echo -e ${CL_BLU}" ██████╗ █████╗ ██████╗ ██████╗  ██████╗ ███╗   ██╗ ██████╗  ██████╗ ███╗   ███╗"${CL_RST}
-	@echo -e ${CL_BLU}"██╔════╝██╔══██╗██╔══██╗██╔══██╗██╔═══██╗████╗  ██║ ██╔══██╗██╔═══██╗████╗ ████║"${CL_RST}
-	@echo -e ${CL_BLU}"██║     ███████║██████╔╝██████╔╝██║   ██║██╔██╗ ██║ ██████╔╝██║   ██║██╔████╔██║"${CL_RST}
-	@echo -e ${CL_BLU}"██║     ██╔══██║██╔══██╗██╔══██╗██║   ██║██║╚██╗██║ ██╔══██╗██║   ██║██║╚██╔╝██║"${CL_RST}
-	@echo -e ${CL_BLU}"╚██████╗██║  ██║██║  ██║██████╔╝╚██████╔╝██║ ╚████║ ██║  ██║╚██████╔╝██║ ╚═╝ ██║"${CL_RST}
-	@echo -e ${CL_BLU}" ╚═════╝╚═╝  ╚═╝╚═╝  ╚═╝╚═════╝  ╚═════╝ ╚═╝  ╚═══╝ ╚═╝  ╚═╝ ╚═════╝ ╚═╝     ╚═╝"${CL_RST}
-	@echo -e ${CL_RED}"                                   carbonrom.org                                "${CL_RST}
-	@echo -e ${CL_YLW}"════════════════════════════════════════════════════════════════════════════════"${CL_RST}
-	@echo -e ${CL_CYN}"Package zip: "${CL_MAG} $(CARBON_TARGET_PACKAGE)                                 ${CL_RST}
-	@echo -e ${CL_CYN}"Package md5: "${CL_MAG}" `cat $(CARBON_TARGET_PACKAGE).md5sum | cut -d ' ' -f 1`"${CL_RST}
-	@echo -e ${CL_CYN}"Package size:"${CL_MAG}" `du -h $(CARBON_TARGET_PACKAGE) | cut -f 1`            "${CL_RST}
+	@echo -e ${CL_CYN}"Package zip: "${CL_MAG} $(OCTOS_TARGET_PACKAGE)                                 ${CL_RST}
+	@echo -e ${CL_CYN}"Package md5: "${CL_MAG}" `cat $(OCTOS_TARGET_PACKAGE).md5sum | cut -d ' ' -f 1`"${CL_RST}
+	@echo -e ${CL_CYN}"Package size:"${CL_MAG}" `du -h $(OCTOS_TARGET_PACKAGE) | cut -f 1`            "${CL_RST}
 	@echo -e ${CL_YLW}"════════════════════════════════════════════════════════════════════════════════"${CL_RST}
 
 endif    # build_ota_package

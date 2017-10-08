@@ -525,32 +525,38 @@ else if get_stage("%(bcb_dev)s") == "3/3" then
     script.Print("Formatting /data")
     script.FormatPartition("/data", OPTIONS.mount_by_label)
 
-  script.Print("                 ,....,                 ");
-  script.Print("           .,lx0XNWWWNKOd:.             ");
-  script.Print("        .:OWMMMMMMMMMMMMMMMXo.          ");
-  script.Print("      .oWMMMMMMMMMMMMMMMMMMMMM0,        ");
-  script.Print("     cWMMMMMMMMMMMMMMMMMMMMMMMMMO.      ");
-  script.Print("   .OMMMMMMMMMMMMMMMMMMMMMMMMMMWd.      ");
-  script.Print("  .KMMMMMMMMMKkdlllldkKMMMMMMMO.        ");
-  script.Print("  OMMMM`  x;.          .;xWMX;          ");
-  script.Print(" :MMMM  ..`               .;.           ");
-  script.Print(" KMMM  .o;                              ");
-  script.Print(".MMM  .0M;                              ");
-  script.Print("'MM` .KMMl                              ");
-  script.Print(".MN  xMMM0                              ");
-  script.Print(".NM ,MMMMM:                           ..");
-  script.Print(" dM :MMMMMW'                         .k ");
-  script.Print(" .N cMMMMMMW;                       'Xc ");
-  script.Print("  ,x;MMMMMMMMx.                   .oW0. ");
-  script.Print("   ,.NMMMMMMMMWx'                lNMK.  ");
-  script.Print("     ,NMMMMMMMMMMXx:'.     ..:o ,MMO.   ");
-  script.Print("      .kMMMMMMMMMMMMMMNXXXNMMW  NWl.    ");
-  script.Print("        ,OMMMMMMMMMMMMMMMMMMK  Xd.      ");
-  script.Print("          .oKMMMMMMMMMMMMMKc  :.        ");
-  script.Print("             .:okKNWWWNKdl'  '          ");
-  script.Print("                 ''...`',  +'           ");
-  script.Print("                                        ");
-  script.Print("                carbonrom.org           ");
+    script.Print("                                          ");
+  script.Print("                                          ");
+  script.Print("*--==--==--==--==-==-==--==--==--==--==--*");
+  script.Print("*              TEAM OCTOS                *");
+  script.Print("*--==--==--==--==-==-==--==--==--==--==--*");
+  script.Print("                                          ");
+  script.Print("            .::///++++///::-.             ");
+  script.Print("        ':/+++++/:-::::/+++////-'         ");
+  script.Print("      -/+++/-:::////////::--/++://.       ");
+  script.Print("    -+/o+////:---:::/::---://--+o://.     ");
+  script.Print("   //+s+/:---:++/oso+////////++/+s+:+:    ");
+  script.Print(" '+/ss/---:++:'-+/-----------------:/+/-  ");
+  script.Print(" +/s+---/o/' '+/---------------+o://+:-:+'");
+  script.Print(":/s/--:os::-:+/:---::::--------++/syo//-:o");
+  script.Print(".s:--/s/::-..-:-:/:::/+//:-----/o+:oo/---o");
+  script.Print(":/--:ss-''    +:.     '+:---------:oyy+-:/");
+  script.Print("o---+o.-s:  -:' '      .+-----------::::s'");
+  script.Print("+:--:: .-' :. /s/      -/-::----------:oo ");
+  script.Print("'+:--:    -- .yy+'    '+-:/---------:/+// ");
+  script.Print("  o/-::--:o   '      .+/+/------://o/:-o' ");
+  script.Print(" +:---:---+        '/o:..---/s+o+-o/--+.  ");
+  script.Print("-/---//---:/-'''.://o.   .:++//-/+:-:+.   ");
+  script.Print("/:---o---/--::////+s+//++++/:-/+:--//'    ");
+  script.Print("-+---o---+----o/.' ::::::::/+/:--//.      ");
+  script.Print(" :+::+/--/+:--:/++///+/++/:---//:.        ");
+  script.Print("   .--:+:-:+///::-------::///:.           ");
+  script.Print("       '::///-'.--:::::--.'               ");
+  script.Print("                                          ");
+  script.Print("*--==--==--==--==-==-==--==--==--==--==--*");
+  script.Print("*            Android  8.0.0              *");
+  script.Print("*--==--==--==--==-==-==--==--==--==--==--*");
+  script.Print("            www.teamoctos.com           ");
 
   system_progress = 0.75
 
@@ -602,7 +608,7 @@ else if get_stage("%(bcb_dev)s") == "3/3" then
   script.WriteRawImage(bootpartition, "boot.img")
 
   script.ShowProgress(0.1, 0)
-  script.Print("Enjoy CarbonROM!");
+  script.Print("Release the Karaken!");
   device_specific.FullOTA_InstallEnd()
 
   if OPTIONS.extra_script is not None:

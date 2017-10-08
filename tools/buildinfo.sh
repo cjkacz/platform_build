@@ -64,6 +64,6 @@ fi
 echo "ro.build.characteristics=$TARGET_AAPT_CHARACTERISTICS"
 
 # Carbon properties
-echo "ro.carbon.device=$CARBON_DEVICE"
+echo "ro.octos.device=$OCTOS_DEVICE"
 
 echo "# end build properties"

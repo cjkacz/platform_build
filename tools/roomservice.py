@@ -36,18 +36,18 @@ except ImportError:
 
 # Config
 # set this to the default remote to use in repo
-default_rem = "carbon"
+default_rem = "octos"
 # set this to the default revision to use (branch/tag name)
-default_rev = "cr-6.0"
+default_rev = "oreo"
 # set this to the remote that you use for projects from your team repos
 # example fetch="https://github.com/omnirom"
-default_team_rem = "carbon"
+default_team_rem = "octos"
 # this shouldn't change unless google makes changes
 local_manifest_dir = ".repo/local_manifests"
 # change this to your name on github (or equivalent hosting)
-android_team = "CarbonROM"
+android_team = "OctOS"
 # url to gerrit repository
-gerrit_url = "review.carbonrom.org"
+gerrit_url = "http://review.teamoctos.com"
 
 
 def check_repo_exists(git_data, device):
@@ -213,7 +213,7 @@ def parse_device_from_folder(device):
 
 
 def parse_dependency_file(location):
-    dep_file = "carbon.dependencies"
+    dep_file = "octos.dependencies"
     dep_location = '/'.join([location, dep_file])
     if not os.path.isfile(dep_location):
         print("WARNING: %s file not found" % dep_location)
@@ -275,7 +275,7 @@ def create_dependency_manifest(dependencies):
 
 
 def create_common_dependencies_manifest(dependencies):
-    dep_file = "carbon.dependencies"
+    dep_file = "octos.dependencies"
     common_list = []
     if dependencies is not None:
         for dependency in dependencies:
